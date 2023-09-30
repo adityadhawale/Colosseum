@@ -34,7 +34,7 @@ public class AirSim : ModuleRules
     {
         HeaderOnlyNoRpc,
         HeaderOnlyWithRpc,
-        //CppCompileNoRpc,
+        CppCompileNoRpc,
         CppCompileWithRpc
     }
 
@@ -55,10 +55,10 @@ public class AirSim : ModuleRules
                 LoadAirSimDependency(Target, "rpclib", "rpc");
                 break;
 
-            //case CompileMode.CppCompileNoRpc:
-            //    LoadAirSimDependency(Target, "MavLinkCom", "MavLinkCom");
-            //    PublicDefinitions.Add("AIRLIB_NO_RPC=1");
-            //    break;
+            case CompileMode.CppCompileNoRpc:
+                //LoadAirSimDependency(Target, "MavLinkCom", "MavLinkCom");
+                PublicDefinitions.Add("AIRLIB_NO_RPC=1");
+                break;
 
             case CompileMode.CppCompileWithRpc:
                 LoadAirSimDependency(Target, "rpclib", "rpc");
