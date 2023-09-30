@@ -34,14 +34,13 @@ public class AirSim : ModuleRules
     {
         HeaderOnlyNoRpc,
         HeaderOnlyWithRpc,
-        CppCompileNoRpc,
+        //CppCompileNoRpc,
         CppCompileWithRpc
     }
 
     private void SetupCompileMode(CompileMode mode, ReadOnlyTargetRules Target)
     {
-        LoadAirSimDependency(Target, "MavLinkCom", "MavLinkCom");
-
+        //LoadAirSimDependency(Target, "MavLinkCom", "MavLinkCom");
         switch (mode)
         {
             case CompileMode.HeaderOnlyNoRpc:
@@ -56,10 +55,10 @@ public class AirSim : ModuleRules
                 LoadAirSimDependency(Target, "rpclib", "rpc");
                 break;
 
-            case CompileMode.CppCompileNoRpc:
-                LoadAirSimDependency(Target, "MavLinkCom", "MavLinkCom");
-                PublicDefinitions.Add("AIRLIB_NO_RPC=1");
-                break;
+            //case CompileMode.CppCompileNoRpc:
+            //    LoadAirSimDependency(Target, "MavLinkCom", "MavLinkCom");
+            //    PublicDefinitions.Add("AIRLIB_NO_RPC=1");
+            //    break;
 
             case CompileMode.CppCompileWithRpc:
                 LoadAirSimDependency(Target, "rpclib", "rpc");
@@ -68,7 +67,6 @@ public class AirSim : ModuleRules
             default:
                 throw new System.Exception("CompileMode specified in plugin's Build.cs file is not recognized");
         }
-
     }
 
     public AirSim(ReadOnlyTargetRules Target) : base(Target)
@@ -105,12 +103,12 @@ public class AirSim : ModuleRules
             PublicAdditionalLibraries.Add("dxguid.lib");
         }
 
-		if (Target.Platform == UnrealTargetPlatform.Linux)
-		{
-			// needed when packaging
-			PublicAdditionalLibraries.Add("stdc++");
-			PublicAdditionalLibraries.Add("supc++");
-		}
+        if (Target.Platform == UnrealTargetPlatform.Linux)
+        {
+             // needed when packaging
+             PublicAdditionalLibraries.Add("stdc++");
+             PublicAdditionalLibraries.Add("supc++");
+        }
     }
 
     static void CopyFileIfNewer(string srcFilePath, string destFolder)
